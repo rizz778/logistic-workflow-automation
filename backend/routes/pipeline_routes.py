@@ -39,12 +39,12 @@ async def fetch_history():
 async def fetch_analytics():
     return await get_run_analytics()
 
-#endpoint for updating data incase some fieeld extraction goes wrong through ocr
+#endpoint for updating data incase some fieeld extraction goes wrong through gemini
 @router.post("/update-status/{run_id}")
 async def update_status(run_id: int, request: UpdateStatusRequest):
     return await handle_update_status(run_id, request.dict(exclude_unset=True))
 
-#endpoint for processing user's query
+#endpoint for processing user's natural language query query
 @router.post("/query")
 async def query_pipeline(request: QueryRequest):
     return await handle_database_query(request.dict())

@@ -7,8 +7,6 @@ from agents.router import router_agent
 from services.storage import save_pipeline_run
 
 
-
-# 2. Document Pipeline Graph (New)
 def db_saver_node(state: PipelineState) -> PipelineState:
     """Graph node to persist final pipeline outcomes to the SQLite database."""
     import json

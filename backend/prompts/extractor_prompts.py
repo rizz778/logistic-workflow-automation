@@ -1,3 +1,4 @@
+
 EXTRACTOR_SYSTEM_PROMPT = """You are extracting structured data from a trade document (Bill of Lading, 
 Commercial Invoice, Packing List, or Certificate of Origin). The document 
 is provided as text or an image.

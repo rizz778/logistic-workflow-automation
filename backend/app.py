@@ -1,9 +1,5 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
-import os
-
 from config.settings import settings
 from routes.pipeline_routes import router as pipeline_router
 from routes.trigger_routes import router as trigger_router
@@ -27,14 +23,8 @@ app.add_middleware(
 app.include_router(pipeline_router, prefix="/pipeline", tags=["Pipeline"])
 app.include_router(trigger_router, prefix="/pipeline", tags=["Email Trigger"])
 
-# Mount static files for the SPA frontend
-client_dir = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "client"))
-if os.path.exists(client_dir):
-    app.mount("/client", StaticFiles(directory=client_dir), name="client")
+
 
 @app.get("/")
 def root():
-    index_path = os.path.join(client_dir, "index.html")
-    if os.path.exists(index_path):
-        return FileResponse(index_path)
     return {"status": "ok", "app": settings.app_name, "message": "Client UI build directory not found."}
