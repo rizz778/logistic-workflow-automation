@@ -42,13 +42,9 @@ def validator_agent(state: PipelineState) -> PipelineState:
                 
                 result, expected, found, reason = validate_field(field, rule, value)
                 
-                if confidence < 0.70:
-                    if result == "skipped":
-                        result = "uncertain"
-                        reason = f"Field was not found, but document parsing confidence was too low ({confidence:.2f})."
-                    else:
-                        result = "uncertain"
-                        reason = f"Extraction confidence too low to trust ({confidence:.2f}). " + (reason or "")
+                if confidence < 0.70 and result != "skipped":
+                    result = "uncertain"
+                    reason = f"Extraction confidence too low to trust ({confidence:.2f}). " + (reason or "")
                     
                 doc_results[field] = {
                     "result": result,
@@ -70,13 +66,9 @@ def validator_agent(state: PipelineState) -> PipelineState:
             
             result, expected, found, reason = validate_field(field, rule, value)
             
-            if confidence < 0.70:
-                if result == "skipped":
-                    result = "uncertain"
-                    reason = f"Field was not found, but document parsing confidence was too low ({confidence:.2f})."
-                else:
-                    result = "uncertain"
-                    reason = f"Extraction confidence too low to trust ({confidence:.2f}). " + (reason or "")
+            if confidence < 0.70 and result != "skipped":
+                result = "uncertain"
+                reason = f"Extraction confidence too low to trust ({confidence:.2f}). " + (reason or "")
                 
             validation_results[field] = {
                 "result": result,
