@@ -1,20 +1,11 @@
-<<<<<<< Updated upstream
-=======
-import json
->>>>>>> Stashed changes
+
 from google.generativeai.types import GenerationConfig
 from concurrent.futures import ThreadPoolExecutor
 from graph.state import PipelineState
 from config.settings import settings
 from schemas.extractor_schemas import TradeDocumentExtraction
-<<<<<<< Updated upstream
 from helpers.extractor_helper import extract_single_file
 from helpers.common_helpers import get_gemini_client
-=======
-from prompts.extractor_prompts import EXTRACTOR_SYSTEM_PROMPT
-from helpers.common import get_gemini_client
-
->>>>>>> Stashed changes
 
 def extract_agent(state: PipelineState) -> PipelineState:
     logs = list(state.get("logs", []))
@@ -38,24 +29,7 @@ def extract_agent(state: PipelineState) -> PipelineState:
             temperature=0.1 #deterministic output
         )
         
-<<<<<<< Updated upstream
         logs.append(f"Extractor Agent: Starting concurrent extraction of {len(file_paths)} files...")
-=======
-        # 4. Invoke model with inline bytes and prompt
-        response = model.generate_content(
-            [
-                {
-                    "mime_type": mime_type,  # Helps model to understand the type of file we are passing
-                    "data": file_bytes
-                },
-                EXTRACTOR_SYSTEM_PROMPT
-            ],
-            generation_config=config
-        )
-        
-        # 5. Parse structured output JSON
-        extracted_data = json.loads(response.text)
->>>>>>> Stashed changes
         
         # Process files in parallel using ThreadPoolExecutor
         with ThreadPoolExecutor(max_workers=len(file_paths)) as executor:

@@ -1,12 +1,6 @@
 from graph.state import PipelineState
-<<<<<<< Updated upstream
 from helpers.common_helpers import load_rules
 from helpers.validator_agent import validate_field, validate_cross_document_consistency
-
-=======
-from helpers.common import load_rules
-from helpers.validator import validate_field 
->>>>>>> Stashed changes
 
 #Rule basded validator no LLM (may cause hallucination)
 

@@ -3,11 +3,7 @@ from graph.state import PipelineState
 from config.llm import get_llm
 from schemas.router_schemas import RouterResponse
 from prompts.router_prompts import ROUTER_SYSTEM_PROMPT
-<<<<<<< Updated upstream
 from helpers.router_agent import decide_lane
-=======
-from helpers.router import decide_lane
->>>>>>> Stashed changes
 
 def router_agent(state: PipelineState) -> PipelineState:
     logs = list(state.get("logs", []))
